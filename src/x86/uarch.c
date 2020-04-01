@@ -202,9 +202,9 @@ enum cpuinfo_uarch cpuinfo_x86_decode_uarch(
 					}
 				case 0x17:
 					switch (model_info->model) {
-						case 0x01: // 14 nm Naples, Whitehaven, Summit Ridge, Snowy_Owl
+						case 0x01: // 14 nm Naples, Whitehaven, Summit Ridge, Snowy Owl
 						case 0x08: // 12 nm Pinnacle Ridge
-						case 0x11: // 14 nm Raven_Ridge, Great Horned_Owl
+						case 0x11: // 14 nm Raven Ridge, Great Horned Owl
 						case 0x18: // 12 nm Picasso
 							return cpuinfo_uarch_zen;
 						case 0x31: // Rome, Castle Peak
