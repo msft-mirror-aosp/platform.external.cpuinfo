@@ -62,6 +62,7 @@ cc_library_static {
                 "src/arm/linux/aarch32-isa.c",
             ],
             cflags: [
+                "-mcpu=generic",
                 "-march=armv7-a",
             ],
        },
