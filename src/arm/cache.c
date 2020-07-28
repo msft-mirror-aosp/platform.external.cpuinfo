@@ -1106,7 +1106,6 @@ void cpuinfo_arm_decode_cache(
 			break;
 		}
 		case cpuinfo_uarch_cortex_a76:
-		case cpuinfo_uarch_cortex_a76ae:
 		{
 			/*
 			 * ARM Cortex-A76 Core Technical Reference Manual
