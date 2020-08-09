@@ -314,7 +314,8 @@ const struct cpuinfo_processor* CPUINFO_ABI cpuinfo_get_current_processor(void) 
 		cpuinfo_log_fatal("cpuinfo_get_%s called before cpuinfo is initialized", "current_processor");
 	}
 	#ifdef __linux__
-		unsigned cpu;
+		/* Initializing this variable silences a MemorySanitizer error. */
+		unsigned cpu = 0;
 		if CPUINFO_UNLIKELY(syscall(__NR_getcpu, &cpu, NULL, NULL) != 0) {
 			return 0;
 		}
@@ -332,7 +333,8 @@ const struct cpuinfo_core* CPUINFO_ABI cpuinfo_get_current_core(void) {
 		cpuinfo_log_fatal("cpuinfo_get_%s called before cpuinfo is initialized", "current_core");
 	}
 	#ifdef __linux__
-		unsigned cpu;
+		/* Initializing this variable silences a MemorySanitizer error. */
+		unsigned cpu = 0;
 		if CPUINFO_UNLIKELY(syscall(__NR_getcpu, &cpu, NULL, NULL) != 0) {
 			return 0;
 		}
@@ -357,7 +359,8 @@ uint32_t CPUINFO_ABI cpuinfo_get_current_uarch_index(void) {
 			}
 
 			/* General case */
-			unsigned cpu;
+			/* Initializing this variable silences a MemorySanitizer error. */
+			unsigned cpu = 0;
 			if CPUINFO_UNLIKELY(syscall(__NR_getcpu, &cpu, NULL, NULL) != 0) {
 				return 0;
 			}
@@ -368,6 +371,37 @@ uint32_t CPUINFO_ABI cpuinfo_get_current_uarch_index(void) {
 		#else
 			/* Fallback: pretend to be on the big core. */
 			return 0;
+		#endif
+	#else
+		/* Only ARM/ARM64 processors may include cores of different types in the same package. */
+		return 0;
+	#endif
+}
+
+uint32_t CPUINFO_ABI cpuinfo_get_current_uarch_index_with_default(uint32_t default_uarch_index) {
+	if CPUINFO_UNLIKELY(!cpuinfo_is_initialized) {
+		cpuinfo_log_fatal("cpuinfo_get_%s called before cpuinfo is initialized", "current_uarch_index_with_default");
+	}
+	#if CPUINFO_ARCH_ARM || CPUINFO_ARCH_ARM64
+		#ifdef __linux__
+			if (cpuinfo_linux_cpu_to_uarch_index_map == NULL) {
+				/* Special case: avoid syscall on systems with only a single type of cores */
+				return 0;
+			}
+
+			/* General case */
+			/* Initializing this variable silences a MemorySanitizer error. */
+			unsigned cpu = 0;
+			if CPUINFO_UNLIKELY(syscall(__NR_getcpu, &cpu, NULL, NULL) != 0) {
+				return default_uarch_index;
+			}
+			if CPUINFO_UNLIKELY((uint32_t) cpu >= cpuinfo_linux_cpu_max) {
+				return default_uarch_index;
+			}
+			return cpuinfo_linux_cpu_to_uarch_index_map[cpu];
+		#else
+			/* Fallback: no API to query current core, use default uarch index. */
+			return default_uarch_index;
 		#endif
 	#else
 		/* Only ARM/ARM64 processors may include cores of different types in the same package. */
