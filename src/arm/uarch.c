@@ -88,8 +88,11 @@ void cpuinfo_arm_decode_vendor_uarch(
 				case 0xD0D:
 					*uarch = cpuinfo_uarch_cortex_a77;
 					break;
-				case 0xD0E:
-					*uarch = cpuinfo_uarch_cortex_a76ae;
+				case 0xD0E: /* Cortex-A76AE */
+					*uarch = cpuinfo_uarch_cortex_a76;
+					break;
+				case 0xD41: /* Cortex-A78 */
+					*uarch = cpuinfo_uarch_cortex_a78;
 					break;
 #if CPUINFO_ARCH_ARM64 && !defined(__ANDROID__)
 				case 0xD4A:
@@ -155,9 +158,11 @@ void cpuinfo_arm_decode_vendor_uarch(
 		case 'H':
 			*vendor = cpuinfo_vendor_huawei;
 			switch (midr_get_part(midr)) {
-				case 0xD01: /* Kunpeng920 ARM-base CPU*/
-					*uarch = cpuinfo_uarch_taishanv110;
+#if CPUINFO_ARCH_ARM64 && !defined(__ANDROID__)
+				case 0xD01: /* Kunpeng 920 series */
+					*uarch = cpuinfo_uarch_taishan_v110;
 					break;
+#endif
 				case 0xD40: /* Kirin 980 Big/Medium cores -> Cortex-A76 */
 					*vendor = cpuinfo_vendor_arm;
 					*uarch = cpuinfo_uarch_cortex_a76;
