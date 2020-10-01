@@ -14,6 +14,8 @@ static const char* vendor_to_string(enum cpuinfo_vendor vendor) {
 			return "Intel";
 		case cpuinfo_vendor_amd:
 			return "AMD";
+		case cpuinfo_vendor_huawei:
+			return "Huawei";
 		case cpuinfo_vendor_hygon:
 			return "Hygon";
 		case cpuinfo_vendor_arm:
@@ -179,10 +181,10 @@ static const char* uarch_to_string(enum cpuinfo_uarch uarch) {
 			return "Cortex-A75";
 		case cpuinfo_uarch_cortex_a76:
 			return "Cortex-A76";
-		case cpuinfo_uarch_cortex_a76ae:
-			return "Cortex-A76AE";
 		case cpuinfo_uarch_cortex_a77:
 			return "Cortex-A77";
+		case cpuinfo_uarch_cortex_a78:
+			return "Cortex-A78";
 		case cpuinfo_uarch_scorpion:
 			return "Scorpion";
 		case cpuinfo_uarch_krait:
@@ -243,6 +245,10 @@ static const char* uarch_to_string(enum cpuinfo_uarch uarch) {
 			return "Brahma B53";
 		case cpuinfo_uarch_xgene:
 			return "X-Gene";
+		case cpuinfo_uarch_dhyana:
+			return "Dhyana";
+		case cpuinfo_uarch_taishan_v110:
+			return "TaiShan v110";
 		default:
 			return NULL;
 	}
