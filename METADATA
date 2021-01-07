@@ -9,11 +9,11 @@ third_party {
     type: GIT
     value: "https://github.com/pytorch/cpuinfo"
   }
-  version: "ed8b86a253800bafdb7b25c5c399f91bff9cb1f3"
+  version: "5916273f79a21551890fd3d56fc5375a78d1598d"
   license_type: NOTICE
   last_upgrade_date {
     year: 2020
-    month: 11
-    day: 19
+    month: 12
+    day: 22
   }
 }
