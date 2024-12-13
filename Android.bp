@@ -90,7 +90,12 @@ cc_library_static {
             ],
         },
         riscv64: {
-            srcs: ["src/riscv/linux/init.c"],
+            srcs: [
+                "src/riscv/linux/init.c",
+                "src/riscv/linux/riscv-hw.c",
+                "src/riscv/linux/riscv-isa.c",
+                "src/riscv/uarch.c",
+            ],
         },
         x86: {
             srcs: cpuinfo_x86_common_src_files,
