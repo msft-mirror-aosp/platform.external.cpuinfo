@@ -1,19 +1,20 @@
+# This project was upgraded with external_updater.
+# Usage: tools/external_updater/updater.sh update external/cpuinfo
+# For more info, check https://cs.android.com/android/platform/superproject/main/+/main:tools/external_updater/README.md
+
 name: "cpuinfo"
 description: "cpuinfo is a library to detect essential for performance optimization information about host CPU."
 third_party {
-  url {
-    type: HOMEPAGE
-    value: "https://github.com/pytorch/cpuinfo"
-  }
-  url {
-    type: GIT
-    value: "https://github.com/pytorch/cpuinfo"
-  }
-  version: "8ec7bd91ad0470e61cf38f618cc1f270dede599c"
   license_type: NOTICE
   last_upgrade_date {
-    year: 2022
-    month: 9
-    day: 1
+    year: 2024
+    month: 12
+    day: 10
+  }
+  homepage: "https://github.com/pytorch/cpuinfo"
+  identifier {
+    type: "Git"
+    value: "https://github.com/pytorch/cpuinfo"
+    version: "ca156f7bc9109c552973414a63d310f76ef0cbf8"
   }
 }

@@ -68,6 +68,7 @@ cc_library_static {
         "src/init.c",
         "src/api.c",
         "src/cache.c",
+        "src/log.c",
         "src/linux/processors.c",
         "src/linux/smallfile.c",
         "src/linux/multiline.c",
@@ -102,8 +103,12 @@ cc_library_static {
         "-Wno-unused-function",
         "-Wno-unused-parameter",
         "-Wno-missing-field-initializers",
+        "-DCPUINFO_LOG_LEVEL=2",
     ],
     whole_static_libs: [
         "libclog",
+    ],
+    shared_libs: [
+        "liblog",
     ],
 }
