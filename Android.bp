@@ -83,10 +83,18 @@ cc_library_static {
                 "-mcpu=generic",
                 "-march=armv7-a",
             ],
-       },
+        },
         arm64: {
             srcs: cpuinfo_arm_common_src_files + [
                 "src/arm/linux/aarch64-isa.c",
+            ],
+        },
+        riscv64: {
+            srcs: [
+                "src/riscv/linux/init.c",
+                "src/riscv/linux/riscv-hw.c",
+                "src/riscv/linux/riscv-isa.c",
+                "src/riscv/uarch.c",
             ],
         },
         x86: {
